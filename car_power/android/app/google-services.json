@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "691088546211",
+    "project_id": "car-power-c559c",
+    "storage_bucket": "car-power-c559c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:691088546211:android:7880d6cd108ba2d40c2216",
+        "android_client_info": {
+          "package_name": "com.example.car_power"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "691088546211-3n06dhlbtp39t6nmcdio7pbr3g16vji8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARSwt4h_xKdOqCBdJ3gp-yBLSsLKgYl9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "691088546211-3n06dhlbtp39t6nmcdio7pbr3g16vji8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
