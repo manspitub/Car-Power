@@ -1,3 +1,4 @@
+import 'package:car_power/pages/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
             return Text('Something went wrong');
           } else if (snapshot.hasData) {
             print("perfe");
-            return MyHomePage(title: 'Mi aplicacion');
+            return SplashScreen();
           } else {
             return Center(
               child: CircularProgressIndicator(),
