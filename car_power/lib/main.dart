@@ -14,7 +14,10 @@ class MyApp extends StatelessWidget {
   
    MyApp({Key? key}) : super(key: key);
 
-  final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
+  final Future<FirebaseApp> _fbApp = Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+
+  );
 
   // This widget is the root of your application.
   @override

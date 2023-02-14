@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:car_power/pages/car_list.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -27,7 +28,7 @@ class SplashScreen extends StatelessWidget {
         ],
       ),
       backgroundColor: Colors.redAccent,
-      nextScreen: const MyHomePage(title: "hola"),
+      nextScreen: CarListScreen(),
       splashIconSize: 300,
       duration: 4000,
       splashTransition: SplashTransition.slideTransition,
