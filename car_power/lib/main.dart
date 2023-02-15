@@ -1,3 +1,5 @@
+import 'package:car_power/pages/add_car_page.dart';
+import 'package:car_power/pages/edit_car_page.dart';
 import 'package:car_power/pages/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -43,7 +45,12 @@ class MyApp extends StatelessWidget {
           }
         },
   
-      )
+      ),
+      initialRoute: '/',
+      routes: {
+        '/add': (context) => const AddCarPage(),
+        '/edit': (context) => const EditCarPage() 
+      },
     );
   }
 }

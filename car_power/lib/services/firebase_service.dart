@@ -20,3 +20,11 @@ Future<List>getCars() async {
   return cars;
 
 }
+
+Future<void> addCar(String marca, int caballos, String descripcion, bool especial, int precio, int year) async {
+  await db.collection("cars").add({"Marca": marca, "Descripcion": descripcion, "Caballos": caballos, "Especial": especial, "Precio": precio, "Year": year});
+}
+
+Future<void> updateCar(String uid, String newMarca, int newCaballos, String newDescripcion, bool newEspecial, int newPrecio, int newYear) async {
+  await db.collection("cars").doc(uid).set({"Marca": newMarca, "Descripcion": newDescripcion, "Caballos": newCaballos, "Especial": newEspecial, "Precio": newPrecio, "Year": newYear});
+}
