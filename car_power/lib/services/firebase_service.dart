@@ -12,7 +12,17 @@ Future<List>getCars() async {
   QuerySnapshot queryCars = await collectionReferenceCars.get();
 
   queryCars.docs.forEach((element) {
-    cars.add(element.data());
+    final Map<String, dynamic> data = element.data() as Map<String, dynamic>;
+    final car = {
+      "uid": element.id,
+      "Year": data["Year"],
+       "Marca": data["Marca"],
+      "Descripcion": data["Descripcion"],
+       "Caballos": data["Caballos"],
+        "Especial": data["Especial"],
+         "Precio": data["Precio"]
+    };
+    cars.add(car);
   });
 
   
@@ -26,5 +36,11 @@ Future<void> addCar(String marca, int caballos, String descripcion, bool especia
 }
 
 Future<void> updateCar(String uid, String newMarca, int newCaballos, String newDescripcion, bool newEspecial, int newPrecio, int newYear) async {
+  print(uid);
   await db.collection("cars").doc(uid).set({"Marca": newMarca, "Descripcion": newDescripcion, "Caballos": newCaballos, "Especial": newEspecial, "Precio": newPrecio, "Year": newYear});
 }
+
+Future<void> deleteCar(String uid)async {
+  await db.collection("cars").doc(uid).delete();
+}
+

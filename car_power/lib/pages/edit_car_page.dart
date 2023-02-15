@@ -25,7 +25,7 @@ class _EditCarPageState extends State<EditCarPage> {
     descripcionController.text = arguments['Descripcion'];
     precioController.text = arguments['Precio'].toString();
     yearController.text = arguments['Year'].toString();
-    caballosController.text = arguments['Year'].toString();
+    caballosController.text = arguments['Caballos'].toString();
     especialController.text = arguments['Especial'].toString();
 
     var isEspecial = false;
@@ -178,8 +178,8 @@ class _EditCarPageState extends State<EditCarPage> {
               ),
             ElevatedButton(
                 onPressed: () async {
-                  
-                  await addCar(marcaController.text, int.parse(caballosController.text), descripcionController.text, isEspecial, int.parse(precioController.text), int.parse(yearController.text), ).then((value) => Navigator.pop(context));
+                  print(arguments["uid"]);
+                  await updateCar(arguments['uid'] ,marcaController.text, int.parse(caballosController.text), descripcionController.text, isEspecial, int.parse(precioController.text), int.parse(yearController.text), ).then((_) => Navigator.pop(context)).timeout(const Duration(seconds: 2));
                 },
                 child: const Text("Actualizar"))
           ],

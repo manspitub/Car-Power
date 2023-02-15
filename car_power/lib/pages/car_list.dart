@@ -58,20 +58,23 @@ class _CarListScreenState extends State<CarListScreen> {
                       colors = Colors.white;
                     }
                     return GestureDetector(
-                      onTap: (() {
-                        Navigator.pushNamed(context, '/edit', arguments: {
+                      onTap: (() async{
+                       await Navigator.pushNamed(context, '/edit', arguments: {
                           "Marca": snapshot.data?[index]['Marca'],
                           "Descripcion": snapshot.data?[index]['Descripcion'],
                           "Precio": snapshot.data?[index]['Precio'],
                           "Year": snapshot.data?[index]['Year'],
                           "Caballos": snapshot.data?[index]['Caballos'],
                           "Especial": snapshot.data?[index]['Especial'],
-
+                          "uid": snapshot.data?[index]['uid']
+                        });
+                        setState(() {
+                          
                         });
                       }),
                       child: Dismissible(
-                        
-                          key: Key(snapshot.data?[index]['Marca']),
+                          
+                          key: Key(snapshot.data?[index]['uid']),
                           background: Container(
                             alignment: AlignmentDirectional.centerEnd,
                             color: Colors.red,
@@ -82,7 +85,7 @@ class _CarListScreenState extends State<CarListScreen> {
                           ),
                           onDismissed: (direction) {
                             setState(() {
-                              snapshot.data!.removeAt(index);
+                              deleteCar(snapshot.data?[index]["uid"]);
                             });
                           },
                           direction: DismissDirection.endToStart,
