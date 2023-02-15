@@ -48,11 +48,94 @@ class _CarListScreenState extends State<CarListScreen> {
             if (snapshot.hasData) {
               print(snapshot.data);
               return ListView.builder(
-                itemCount: snapshot.data?.length,
-                itemBuilder: (context, index) {
-                      return Text(snapshot.data?[index]['Marca']);
-
-                });
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context, index) {
+                    Color colors;
+                    if(snapshot.data?[index]['Especial']){
+                      colors = Colors.greenAccent;
+                    } else {
+                      colors = Colors.white;
+                    }
+                    return Dismissible(
+                        key: Key(snapshot.data?[index]['Marca']),
+                        background: Container(
+                          alignment: AlignmentDirectional.centerEnd,
+                          color: Colors.red,
+                          child: Icon(
+                            Icons.delete,
+                            color: Colors.red,
+                          ),
+                        ),
+                        onDismissed: (direction) {
+                          setState(() {
+                            snapshot.data!.removeAt(index);
+                          });
+                        },
+                        direction: DismissDirection.endToStart,
+                        child: Card(
+                          color: colors,
+                          elevation: 5,
+                          child: Container(
+                            height: 100.0,
+                            child: Row(
+                              children: <Widget>[
+                                Container(
+                                  height: 100.0,
+                                  width: 100.0,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(5),
+                                          topLeft: Radius.circular(5)),
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              "https://www.autobild.es/sites/autobild.es/public/styles/main_element/public/dc/fotos/Audi_S8_01.jpeg?itok=YTYpxpEW"))),
+                                ),
+                                Container(
+                                  height: 100,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(snapshot.data?[index]['Marca'], style: TextStyle(fontWeight: FontWeight.bold),),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                          child: Container(
+                                            width: 50,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.yellow),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10))),
+                                            child: Text(
+                                              (snapshot.data?[index]['Precio']).toString()+ '€',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(0, 5, 0, 2),
+                                                child: Container(
+                                                  width: 260,
+                                                  child: Text(snapshot.data?[index]["Descripcion"], style: TextStyle(
+                                                    fontSize: 15,
+                                                    color: Color.fromARGB(255, 48, 48, 54),
+                                                    
+                                                  ),),
+                                                )
+                                        )],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ));
+                  });
             } else {
               return const Center(child: CircularProgressIndicator());
             }
