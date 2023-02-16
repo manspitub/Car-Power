@@ -1,5 +1,11 @@
+import 'dart:io';
+
 import 'package:car_power/services/firebase_service.dart';
+import 'package:car_power/services/select_image.dart';
+import 'package:car_power/services/upload_image.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
 
 class AddCarPage extends StatefulWidget {
   const AddCarPage({Key? key}) : super(key: key);
@@ -15,6 +21,8 @@ class _AddCarPageState extends State<AddCarPage> {
   TextEditingController precioController = TextEditingController(text: "");
   TextEditingController especialController = TextEditingController(text: "");
   TextEditingController yearController = TextEditingController(text: "");
+
+  File? imagen_to_upload;
 
   @override
   Widget build(BuildContext context) {
@@ -166,9 +174,37 @@ class _AddCarPageState extends State<AddCarPage> {
               title: Text("Especial?"),
               secondary: Icon(Icons.brightness_medium),
               ),
+              Row(
+                children: [
+
+                  imagen_to_upload !=null ? 
+                  Image.file(imagen_to_upload!, fit: BoxFit.fill, width: 140) :Container(
+                    margin: const EdgeInsets.all(10),
+                    height: 80,
+                    width: 140,
+                    decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                    
+                  ),
+                  ElevatedButton(
+                    onPressed: ()async{
+                      final image = await getImageFromGallery();
+                      setState(() {
+                        imagen_to_upload = File(image!.path);
+                      });
+                    }, 
+                     child: Icon(Icons.image)),
+                ],
+              ),
+                
             ElevatedButton(
                 onPressed: () async {
-                  
+                  if(imagen_to_upload == null){
+                    return;
+                  } 
+
+                  final uploaded = await uploadImage(imagen_to_upload!);
+
+
                   await addCar(marcaController.text, int.parse(caballosController.text), descripcionController.text, isEspecial, int.parse(precioController.text), int.parse(yearController.text), ).then((value) => Navigator.pop(context));
                 },
                 child: const Text("Guardar"))

@@ -1,6 +1,7 @@
 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 
 FirebaseFirestore db = FirebaseFirestore.instance;
 
@@ -43,4 +44,6 @@ Future<void> updateCar(String uid, String newMarca, int newCaballos, String newD
 Future<void> deleteCar(String uid)async {
   await db.collection("cars").doc(uid).delete();
 }
+
+
 
